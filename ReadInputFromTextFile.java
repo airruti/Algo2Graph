@@ -27,7 +27,7 @@ public class ReadInputFromTextFile
 
     public void readGraph()
     {
-        File input = new File("graph 01.txt");
+        File input = new File("graph.txt");
         Scanner in = null;
         try
         {

@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 public class Prog19_01 {
     int count = 0;

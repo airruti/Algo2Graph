@@ -1,9 +1,10 @@
-package com.company;
+//package Algo2Graph;
 public class Main {
 
     public static void main(String[] args) {
-        Graph graph = new Graph();
-        graph.readGraph();
+        new ReadInputFromTextFile();
+        //Graph graph = new Graph();
+        //graph.readGraph();
 
         //System.out.println(graph);
 
