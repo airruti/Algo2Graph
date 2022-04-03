@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class FrameDisplay extends JFrame
 {
-    int WIDTH = 750;
+    int WIDTH = 800;
     int HEIGHT = 750;
 
     public FrameDisplay(Graph graph)
