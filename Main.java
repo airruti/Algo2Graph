@@ -1,19 +1,17 @@
-//package Algo2Graph;
+import javax.swing.JFrame;
+
+/**
+ * Name:           Jose Iturria
+ * Section:        COP4534, U01 - Algorithm Techniques
+ * Panther ID:     5464894
+ */
 public class Main {
 
     public static void main(String[] args) {
-        new ReadInputFromTextFile();
-        //Graph graph = new Graph();
-        //graph.readGraph();
+        Graph graph = new Graph("graph.txt");
 
-        //System.out.println(graph);
-
-        //System.out.println(graph);
-
-//        graph.allShortestPaths(arr, arr2, 6);
-//
-//        graph.findAdjacencyVertices(5);
-
-        //new Prog19_01();
+        FrameDisplay frame = new FrameDisplay(graph);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 }

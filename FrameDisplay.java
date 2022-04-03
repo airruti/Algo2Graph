@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 
 /**
@@ -6,17 +5,23 @@ import javax.swing.*;
  * 
  * @author Prof. Antonio Hernandez
  */
+
+/**
+ * Name:           Jose Iturria
+ * Section:        COP4534, U01 - Algorithm Techniques
+ * Panther ID:     5464894
+ */
 public class FrameDisplay extends JFrame
 {
-    int WIDTH = 450;
-    int HEIGHT = 450;
+    int WIDTH = 750;
+    int HEIGHT = 750;
 
-    public FrameDisplay()
+    public FrameDisplay(Graph graph)
     {
         setTitle("Graph Display");
         setSize(WIDTH, HEIGHT);
 
-        GraphDisplay panel = new GraphDisplay();
+        GraphDisplay panel = new GraphDisplay(graph);
         add(panel);
     }
 }

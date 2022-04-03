@@ -1,4 +1,8 @@
-
+/**
+ * Name:           Jose Iturria
+ * Section:        COP4534, U01 - Algorithm Techniques
+ * Panther ID:     5464894
+ */
 public interface GraphInterface
 {
     public void addEdge(int v, int w);

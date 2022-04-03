@@ -1,35 +1,105 @@
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
+
 /**
  * Implements a Graph. Uses an adjacency matrix to represent the graph.
  *
  * @author Prof. Antonio Hernandez
  */
+
+/**
+ * Name:           Jose Iturria
+ * Section:        COP4534, U01 - Algorithm Techniques
+ * Panther ID:     5464894
+ */
 public class Graph implements GraphInterface
 {
-    private int verticesNumber;
-    private int[][] matrix; //adjacency matrix
-
-    public Graph()
-    {
-        verticesNumber = 5;
-        matrix = new int[verticesNumber][verticesNumber];
-    }
-
-    public Graph(int n)
-    {
-        verticesNumber = n;
-        matrix = new int[verticesNumber][verticesNumber];
-    }
-
+    public  int verticesNumber;
+    public  int[][] matrix; //adjacency matrix
+    public  int s;
+    public  int t;
+    public  int[] path;
+    public  int[] d;
+    
     /**
      * Instantiates a graph and initializes it with info from a text file.
      *
      * @param filename text file with graph info
      */
+    public Graph(String filename)
+    {
+        File input = new File(filename);
+        Scanner in = null;
+        try
+        {
+            in = new Scanner(input);
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("File not found!");
+        }
+        int verticesNumber=0;
+
+        while (in.hasNextLine())
+        {
+            verticesNumber = in.nextInt();
+            matrix = new int[verticesNumber][verticesNumber];
+            System.out.println("Number of vertices: " + verticesNumber);
+
+            for(int i=0; i<verticesNumber; i++)
+            {
+                for(int j=0; j<verticesNumber; j++)
+                {
+                    //mat_i_j = in.nextInt();
+                    this.matrix[i][j] = in.nextInt();
+                    //System.out.print(mat_i_j + " ");
+                }
+                //System.out.println();
+            }
+
+            this.s = in.nextInt();
+            this.t = in.nextInt();
+            System.out.println("Source: " + s + ", End: " + t);
+
+        }
+        in.close();
+
+        this.verticesNumber = verticesNumber;
+
+        this.path = new int[verticesNumber];
+        this.d = new int[verticesNumber];
+
+        allShortestPaths(path, d, s);
+        this.path = getPath(s, t, path);
+
+        System.out.println("Shortest Path: " + Arrays.toString(path));
+
+    }
+
+    public int[] getPath(int s, int t, int [] p){
+        int [] shortestPath = new int[p.length];
+
+        int current = t;
+        int total = 0;
+        while (current != s){
+            shortestPath[total] = current;
+            current = p[current];
+            total++;
+        }
+
+        shortestPath[total++] = s;
+        shortestPath = Arrays.copyOf(shortestPath, total);
+
+        for (int i = 0; i < total/2; i++) {
+            int temp = shortestPath[i];
+            shortestPath[i] = shortestPath[total-1-i];
+            shortestPath[total-1-i] = temp;
+        }
+
+        return shortestPath;
+    }
 
     public void addEdge(int v, int w)
     {
@@ -65,51 +135,6 @@ public class Graph implements GraphInterface
         }
 
         return Arrays.copyOf(vert, total);
-    }
-
-    public String toString()
-    {
-        String s = "";
-
-        for (int i=0; i<verticesNumber; i++)
-        {
-            for (int j=0; j<verticesNumber; j++)
-            {
-                s += matrix[i][j] + " ";
-            }
-            s += "\n";
-        }
-
-        return s;
-    }
-
-    public void BFT(int v){
-        boolean [] visited = new boolean[verticesNumber];
-
-        for (int i = 0 ; i < verticesNumber; i++){
-            visited[i] = false;
-        }
-
-        Queue vertexQueue = new Queue();
-
-        vertexQueue.enqueue(v);
-        visited[v] = true;
-
-        while (!vertexQueue.isEmpty()){
-            int w = vertexQueue.getFront();
-            System.out.println(w);
-            vertexQueue.dequeue();
-
-            int[] adj = findAdjacencyVertices(w);
-
-            for (int u : adj) {
-                if (!visited[u]){
-                    vertexQueue.enqueue(u);
-                    visited[u] = true;
-                }
-                
-            }
-        }
     }
 
     public void allShortestPaths(int[] p, int[] d, int v){
@@ -152,17 +177,5 @@ public class Graph implements GraphInterface
                 }
         }
         return index;
-    }
-
-    int totalDistance(int[] a){
-        int n = verticesNumber;
-
-        int totalWeight = 0;
-        for (int i = 0; i < n; i++) {
-            int weight = matrix[a[i]][a[(i+1)%n]];
-
-            totalWeight += weight;
-        }
-        return totalWeight;
     }
 }
