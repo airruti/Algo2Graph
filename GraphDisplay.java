@@ -44,9 +44,10 @@ public class GraphDisplay extends JPanel
         int labelX = 17;
         int labelY = 31;
         double angle = 0.0;
+
         //int[][] test = new int[verticesNumber][verticesNumber];
 
-        //[0, 2, 3] s == 1, i, i + 1 == 1
+        //[0, 2, 3] test[s][s] == 1, i, i + 1 == 1
         //1 0 1 0 0 
         //0 0 0 0 0
         //0 0 0 1 0    //this didnt work.. 
